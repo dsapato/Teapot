@@ -1,0 +1,974 @@
+# depslib dependency file v1.0
+1395278488 source:c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\ambient lighting.cpp
+	<stdlib.h>
+	<math.h>
+	<glew.h>
+	<GL/glut.h>
+	<glm/glm.hpp>
+	<iostream>
+	<fstream>
+	"SOIL.h"
+
+1329267414 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\gl_3_3.h
+	"_int_gl_type.h"
+	"_int_gl_exts.h"
+	"_int_gl_1_1.h"
+	"_int_gl_1_2.h"
+	"_int_gl_1_3.h"
+	"_int_gl_1_4.h"
+	"_int_gl_1_5.h"
+	"_int_gl_2_0.h"
+	"_int_gl_2_1.h"
+	"_int_gl_3_0.h"
+	"_int_gl_3_1.h"
+	"_int_gl_3_2.h"
+	"_int_gl_3_3.h"
+
+1329267414 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_type.h
+	<windows.h>
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1329267414 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_exts.h
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_1_1.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_1_2.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_1_3.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_1_4.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_1_5.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_2_0.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_2_1.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_3_0.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_3_1.h
+
+1329267413 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_3_2.h
+
+1329267414 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glload\include\glload\_int_gl_3_3.h
+
+1329267421 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glutil\include\glutil\glutil.h
+	"Shader.h"
+	"Debug.h"
+	"WindowPos.h"
+	"MousePoles.h"
+	"MatrixStack.h"
+
+1329267421 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glutil\include\glutil\shader.h
+	<exception>
+	<string>
+	<vector>
+
+1329267421 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glutil\include\glutil\debug.h
+
+1329267421 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glutil\include\glutil\windowpos.h
+	<glm/glm.hpp>
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\glm.hpp
+	"core/_fixes.hpp"
+	<cmath>
+	<climits>
+	<cfloat>
+	<limits>
+	"core/setup.hpp"
+	"./core/_detail.hpp"
+	"./core/type.hpp"
+	"./core/func_trigonometric.hpp"
+	"./core/func_exponential.hpp"
+	"./core/func_common.hpp"
+	"./core/func_packing.hpp"
+	"./core/func_geometric.hpp"
+	"./core/func_matrix.hpp"
+	"./core/func_vector_relational.hpp"
+	"./core/func_integer.hpp"
+	"./core/func_noise.hpp"
+	"./core/_swizzle.hpp"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\_fixes.hpp
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\setup.hpp
+	<immintrin.h>
+	<pmmintrin.h>
+	<emmintrin.h>
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\_detail.hpp
+	"setup.hpp"
+	<cassert>
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type.hpp
+	"type_half.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_gentype.hpp"
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat2x2.hpp"
+	"type_mat2x3.hpp"
+	"type_mat2x4.hpp"
+	"type_mat3x2.hpp"
+	"type_mat3x3.hpp"
+	"type_mat3x4.hpp"
+	"type_mat4x2.hpp"
+	"type_mat4x3.hpp"
+	"type_mat4x4.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_half.hpp
+	<cstdlib>
+	"type_half.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_half.inl
+	"_detail.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_float.hpp
+	"type_half.hpp"
+	"setup.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_int.hpp
+	"setup.hpp"
+	"_detail.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_gentype.hpp
+	"type_size.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_size.hpp
+	<cstdlib>
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec1.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec1.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec.hpp
+	"type_gentype.hpp"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\_swizzle.hpp
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec1.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec2.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec2.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec3.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec3.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec4.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_vec4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat2x2.hpp
+	"type_mat.hpp"
+	"type_mat2x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat.hpp
+	"type_gentype.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat2x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat2x3.hpp
+	"type_mat.hpp"
+	"type_mat2x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat2x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat2x4.hpp
+	"type_mat.hpp"
+	"type_mat2x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat2x4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat3x2.hpp
+	"type_mat.hpp"
+	"type_mat3x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat3x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat3x3.hpp
+	"type_mat.hpp"
+	"type_mat3x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat3x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat3x4.hpp
+	"type_mat.hpp"
+	"type_mat3x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat3x4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat4x2.hpp
+	"type_mat.hpp"
+	"type_mat4x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat4x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat4x3.hpp
+	"type_mat.hpp"
+	"type_mat4x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat4x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat4x4.hpp
+	"type_mat.hpp"
+	"type_mat4x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\type_mat4x4.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_trigonometric.hpp
+	"func_trigonometric.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_trigonometric.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_exponential.hpp
+	"func_exponential.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_exponential.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_common.hpp
+	"_fixes.hpp"
+	"func_common.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_common.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_packing.hpp
+	"func_packing.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_packing.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_geometric.hpp
+	"func_geometric.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_geometric.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_matrix.hpp
+	"func_matrix.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_matrix.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_vector_relational.hpp
+	"_detail.hpp"
+	"func_vector_relational.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_vector_relational.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_integer.hpp
+	"func_integer.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_integer.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_noise.hpp
+	"func_noise.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\core\func_noise.inl
+
+1329267421 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glutil\include\glutil\mousepoles.h
+	<glm/glm.hpp>
+	<glm/gtc/quaternion.hpp>
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\gtc\quaternion.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"quaternion.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\gtc\half_float.hpp
+	"../glm.hpp"
+	"half_float.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\gtc\half_float.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\gtc\quaternion.inl
+	<limits>
+
+1329267421 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glutil\include\glutil\matrixstack.h
+	<stack>
+	<vector>
+	<glm/glm.hpp>
+	<glm/gtc/type_ptr.hpp>
+
+1319480118 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\gtc\type_ptr.hpp
+	"../glm.hpp"
+	<cstring>
+	"type_ptr.inl"
+
+1319480118 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\glm\glm\gtc\type_ptr.inl
+
+1066740114 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1249933198 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\freeglut\include\gl\freeglut_std.h
+	<Windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1249933198 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\freeglut\include\gl\freeglut_ext.h
+
+1330753978 c:\users\danny\programming\c++ and opengl\opengl tutorial source\framework\framework.h
+	<vector>
+	<string>
+
+1330753978 c:\users\danny\programming\c++ and opengl\opengl tutorial source\framework\mesh.h
+
+1330753978 c:\users\danny\programming\c++ and opengl\opengl tutorial source\framework\mousepole.h
+	<glm/glm.hpp>
+	<GL/freeglut.h>
+	<glutil/MousePoles.h>
+
+1066740114 c:\users\danny\programming\c++ and opengl\opengl tutorial source\glsdk\freeglut\include\gl\glut.h
+	"freeglut_std.h"
+
+1394405091 source:c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\ambient lightingoriginal.cpp
+
+1394509090 c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1394510043 source:c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\glew.c
+	"glew.h"
+	"wglew.h"
+	"glxew.h"
+	<dlfcn.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+	<AvailabilityMacros.h>
+	<dlfcn.h>
+	<mach-o/dyld.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\wglew.h
+	<windows.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\glxew.h
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xmd.h>
+	<GL/glew.h>
+
+1394511862 source:c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\teapotshaderstuff.cpp
+
+1394514828 c:\users\danny\programming\c++ and opengl\opengl tutorial source\tut 09 lights on\soil.h
+
+1394405091 source:c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\ambient lightingoriginal.cpp
+
+1394510043 source:c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\glew.c
+	"glew.h"
+	"wglew.h"
+	"glxew.h"
+	<dlfcn.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+	<AvailabilityMacros.h>
+	<dlfcn.h>
+	<mach-o/dyld.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\wglew.h
+	<windows.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\glxew.h
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xmd.h>
+	<GL/glew.h>
+
+1395279983 source:c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\ambient lighting.cpp
+	<stdlib.h>
+	<math.h>
+	<glew.h>
+	<GL/glut.h>
+	<glm/glm.hpp>
+	<iostream>
+	<fstream>
+	"SOIL.h"
+
+1066740114 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\freeglut\include\gl\glut.h
+	"freeglut_std.h"
+
+1249933198 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\freeglut\include\gl\freeglut_std.h
+	<Windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\glm.hpp
+	"core/_fixes.hpp"
+	<cmath>
+	<climits>
+	<cfloat>
+	<limits>
+	"core/setup.hpp"
+	"./core/_detail.hpp"
+	"./core/type.hpp"
+	"./core/func_trigonometric.hpp"
+	"./core/func_exponential.hpp"
+	"./core/func_common.hpp"
+	"./core/func_packing.hpp"
+	"./core/func_geometric.hpp"
+	"./core/func_matrix.hpp"
+	"./core/func_vector_relational.hpp"
+	"./core/func_integer.hpp"
+	"./core/func_noise.hpp"
+	"./core/_swizzle.hpp"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\_fixes.hpp
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\setup.hpp
+	<immintrin.h>
+	<pmmintrin.h>
+	<emmintrin.h>
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\_detail.hpp
+	"setup.hpp"
+	<cassert>
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type.hpp
+	"type_half.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_gentype.hpp"
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat2x2.hpp"
+	"type_mat2x3.hpp"
+	"type_mat2x4.hpp"
+	"type_mat3x2.hpp"
+	"type_mat3x3.hpp"
+	"type_mat3x4.hpp"
+	"type_mat4x2.hpp"
+	"type_mat4x3.hpp"
+	"type_mat4x4.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_half.hpp
+	<cstdlib>
+	"type_half.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_half.inl
+	"_detail.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_float.hpp
+	"type_half.hpp"
+	"setup.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_int.hpp
+	"setup.hpp"
+	"_detail.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_gentype.hpp
+	"type_size.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_size.hpp
+	<cstdlib>
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec1.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec1.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec.hpp
+	"type_gentype.hpp"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\_swizzle.hpp
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec1.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec2.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec2.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec3.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec3.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec4.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_vec4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat2x2.hpp
+	"type_mat.hpp"
+	"type_mat2x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat.hpp
+	"type_gentype.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat2x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat2x3.hpp
+	"type_mat.hpp"
+	"type_mat2x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat2x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat2x4.hpp
+	"type_mat.hpp"
+	"type_mat2x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat2x4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat3x2.hpp
+	"type_mat.hpp"
+	"type_mat3x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat3x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat3x3.hpp
+	"type_mat.hpp"
+	"type_mat3x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat3x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat3x4.hpp
+	"type_mat.hpp"
+	"type_mat3x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat3x4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat4x2.hpp
+	"type_mat.hpp"
+	"type_mat4x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat4x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat4x3.hpp
+	"type_mat.hpp"
+	"type_mat4x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat4x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat4x4.hpp
+	"type_mat.hpp"
+	"type_mat4x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\type_mat4x4.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_trigonometric.hpp
+	"func_trigonometric.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_trigonometric.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_exponential.hpp
+	"func_exponential.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_exponential.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_common.hpp
+	"_fixes.hpp"
+	"func_common.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_common.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_packing.hpp
+	"func_packing.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_packing.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_geometric.hpp
+	"func_geometric.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_geometric.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_matrix.hpp
+	"func_matrix.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_matrix.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_vector_relational.hpp
+	"_detail.hpp"
+	"func_vector_relational.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_vector_relational.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_integer.hpp
+	"func_integer.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_integer.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_noise.hpp
+	"func_noise.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\glsdk\glm\glm\core\func_noise.inl
+
+1394514828 c:\users\danny\programming\c++ and opengl\cs 418\mp2turnin\the assignment\soil.h
+
+1394405091 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\ambient lightingoriginal.cpp
+
+1394510043 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\glew.c
+	"glew.h"
+	"wglew.h"
+	"glxew.h"
+	<dlfcn.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+	<AvailabilityMacros.h>
+	<dlfcn.h>
+	<mach-o/dyld.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\wglew.h
+	<windows.h>
+
+1394509090 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\glxew.h
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xmd.h>
+	<GL/glew.h>
+
+1397450504 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\ambient lighting.cpp
+	<stdlib.h>
+	<math.h>
+	<glew.h>
+	<GL/glut.h>
+	<glm/glm.hpp>
+	<iostream>
+	<fstream>
+	"SOIL.h"
+	"objParser.h"
+
+1066740114 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\freeglut\include\gl\glut.h
+	"freeglut_std.h"
+
+1249933198 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\freeglut\include\gl\freeglut_std.h
+	<Windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\glm.hpp
+	"core/_fixes.hpp"
+	<cmath>
+	<climits>
+	<cfloat>
+	<limits>
+	"core/setup.hpp"
+	"./core/_detail.hpp"
+	"./core/type.hpp"
+	"./core/func_trigonometric.hpp"
+	"./core/func_exponential.hpp"
+	"./core/func_common.hpp"
+	"./core/func_packing.hpp"
+	"./core/func_geometric.hpp"
+	"./core/func_matrix.hpp"
+	"./core/func_vector_relational.hpp"
+	"./core/func_integer.hpp"
+	"./core/func_noise.hpp"
+	"./core/_swizzle.hpp"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\_fixes.hpp
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\setup.hpp
+	<immintrin.h>
+	<pmmintrin.h>
+	<emmintrin.h>
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\_detail.hpp
+	"setup.hpp"
+	<cassert>
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type.hpp
+	"type_half.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_gentype.hpp"
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat2x2.hpp"
+	"type_mat2x3.hpp"
+	"type_mat2x4.hpp"
+	"type_mat3x2.hpp"
+	"type_mat3x3.hpp"
+	"type_mat3x4.hpp"
+	"type_mat4x2.hpp"
+	"type_mat4x3.hpp"
+	"type_mat4x4.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_half.hpp
+	<cstdlib>
+	"type_half.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_half.inl
+	"_detail.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_float.hpp
+	"type_half.hpp"
+	"setup.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_int.hpp
+	"setup.hpp"
+	"_detail.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_gentype.hpp
+	"type_size.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_size.hpp
+	<cstdlib>
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec1.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec1.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec.hpp
+	"type_gentype.hpp"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\_swizzle.hpp
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec1.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec2.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec2.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec3.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec3.inl
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec4.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_vec4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat2x2.hpp
+	"type_mat.hpp"
+	"type_mat2x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat.hpp
+	"type_gentype.hpp"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat2x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat2x3.hpp
+	"type_mat.hpp"
+	"type_mat2x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat2x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat2x4.hpp
+	"type_mat.hpp"
+	"type_mat2x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat2x4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat3x2.hpp
+	"type_mat.hpp"
+	"type_mat3x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat3x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat3x3.hpp
+	"type_mat.hpp"
+	"type_mat3x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat3x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat3x4.hpp
+	"type_mat.hpp"
+	"type_mat3x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat3x4.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat4x2.hpp
+	"type_mat.hpp"
+	"type_mat4x2.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat4x2.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat4x3.hpp
+	"type_mat.hpp"
+	"type_mat4x3.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat4x3.inl
+
+1319480255 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat4x4.hpp
+	"type_mat.hpp"
+	"type_mat4x4.inl"
+
+1319480117 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\type_mat4x4.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_trigonometric.hpp
+	"func_trigonometric.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_trigonometric.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_exponential.hpp
+	"func_exponential.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_exponential.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_common.hpp
+	"_fixes.hpp"
+	"func_common.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_common.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_packing.hpp
+	"func_packing.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_packing.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_geometric.hpp
+	"func_geometric.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_geometric.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_matrix.hpp
+	"func_matrix.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_matrix.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_vector_relational.hpp
+	"_detail.hpp"
+	"func_vector_relational.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_vector_relational.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_integer.hpp
+	"func_integer.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_integer.inl
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_noise.hpp
+	"func_noise.inl"
+
+1319480116 c:\users\danny\programming\c++ and opengl\cs 418\mp3\glsdk\glm\glm\core\func_noise.inl
+
+1394514828 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\soil.h
+
+1397428485 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\objectparser.cpp
+	<vector>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1397428799 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\src\objparser.cpp
+	<vector>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	"objParser.h"
+
+1397428701 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\include\objparser.h
+
+1397442861 c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\objparser.h
+	<vector>
+	<GL/glut.h>
+
+1397451900 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\objparser.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<glm/glm.hpp>
+	"objParser.h"
+
