@@ -104,12 +104,12 @@ char* grass_fs = "\
     uniform sampler2D my_color_texture;\
     void main()\
     {\
-        const vec4 AmbientColor = vec4(0.0, 0.1, 0.0, 1.0);\
-        const vec4 DiffuseColor = vec4(0.0, 0.2, 0.0, 1.0);\
+        const vec4 AmbientColor = vec4(0.0, 0.05, 0.0, 1.0);\
+        const vec4 DiffuseColor = vec4(0.0, 0.1, 0.0, 1.0);\
         vec3 normalized_normal = normalize(normal);\
         vec3 normalized_vertex_to_light_vector = normalize(vertex_to_light_vector);\
         float DiffuseTerm = clamp(dot(normal, vertex_to_light_vector), 0.0, 1.0);\
-        gl_FragColor = AmbientColor + DiffuseColor * DiffuseTerm + texture2D(my_color_texture, vec2(position.x, position.y));\;\
+        gl_FragColor = AmbientColor + DiffuseColor * DiffuseTerm + texture2D(my_color_texture, vec2(position.x - floor(position.x), position.y - floor(position.y)));\
 	}";
 
 char* teapot_vs = "\
@@ -131,15 +131,64 @@ char* teapot_fs = "\
         gl_FragColor = AmbientColor + texture2D(my_color_texture, vec2(normal.x,normal.y));\
     }";
 
-char* texture_fs = "\
-    varying vec3 position;\
+char* lightingProgram_vs = "\
+    varying vec4 position;\
     varying vec3 normal;\
-    varying vec3 lightPos;\
-    uniform sampler2D my_color_texture;\
-    void main(void) {\
-        const vec4 AmbientColor = vec4(0.1, 0.1, 0.1, 1.0);\
-        gl_FragColor = AmbientColor + texture2D(my_color_texture, vec2(normal.x,normal.y));\
+    varying vec3 vertex_to_light_vector;\
+    void main()\
+    {\
+        position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+        gl_Position = position;\
+        normal = gl_ProjectionMatrix * vec4(gl_NormalMatrix * gl_Normal, 0.0);\
+        vec4 vertex_in_modelview_space = gl_ModelViewProjectionMatrix * gl_Vertex;\
+        vertex_to_light_vector = vec3(gl_LightSource[0].position - vertex_in_modelview_space);\
     }";
+
+char* lightingProgram_fs = "\
+    varying vec4 position;\
+    varying vec3 normal;\
+    varying vec3 vertex_to_light_vector;\
+    uniform sampler2D my_color_texture;\
+    \
+    float CalcAttenuation(in vec3 cameraSpacePosition, out vec3 lightDirection)\
+    {\
+        vec3 lightDifference =  vertex_to_light_vector;\
+        float lightDistanceSqr = dot(lightDifference, lightDifference);\
+        lightDirection = lightDifference * inversesqrt(lightDistanceSqr);\
+        \
+        return (1 / ( 2.2 * sqrt(lightDistanceSqr)));\
+    }\
+    \
+    void main()\
+    {\
+        const vec4 AmbientColor = vec4(0.2, 0.2, 0.2, 1.0);\
+        const vec4 DiffuseColor = vec4(0.2, 0.2, 0.2, 1.0);\
+        const vec4 specularColor = vec4(0.25, 0.25, 0.25, 1.0);\
+        vec3 normalized_normal = normalize(normal);\
+        vec3 normalized_vertex_to_light_vector = normalize(vertex_to_light_vector);\
+        float DiffuseTerm = clamp(dot(normal, vertex_to_light_vector), 0.0, 1.0);\
+        \
+        \
+        \
+        vec4 cameraSpacePosition = gl_ModelViewProjectionMatrix * vec4(position.x,position.y,position.z, 1.0);\
+        vec3 lightDir = vec3(0.0);\
+        float atten = CalcAttenuation(cameraSpacePosition, lightDir);\
+        vec4 attenIntensity = atten * vec4(0.8, 0.8, 0.8, 1.0);\
+        \
+        vec3 surfaceNormal = normalize(normal);\
+        \
+        vec3 viewDirection = normalize(-cameraSpacePosition);\
+        \
+        vec3 halfAngle = normalize(lightDir + viewDirection);\
+        float blinnTerm = dot(surfaceNormal, halfAngle);\
+        blinnTerm = clamp(blinnTerm, 0, 1);\
+        blinnTerm = dot(surfaceNormal, lightDir) >= 0.0 ? blinnTerm : 0.0;\
+        blinnTerm = pow(blinnTerm, 50);\
+        \
+        \
+        \
+        gl_FragColor = AmbientColor + blinnTerm;\
+	}";
 
 /*
 Tastefully borrowed from
@@ -167,7 +216,7 @@ void printShaderInfoLog(GLuint obj)
 GLuint skyProgram;
 GLuint grassProgram;
 GLuint teapotProgram;
-GLuint textureProgram;
+GLuint lightingProgram;
 
 //Terrain
 float randomValue[50][50];
@@ -226,21 +275,21 @@ void init(void)
 	glAttachShader(teapotProgram, teapotfs);
 	glLinkProgram(teapotProgram);
 
-	//Texture Shader and program
-	GLuint texturevs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(texturevs, 1, (const GLchar **) &(teapot_vs), NULL);
-	glCompileShader(texturevs);
-	printShaderInfoLog(texturevs);
+	//lighting Shader and program
+	GLuint lightingvs = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(lightingvs, 1, (const GLchar **) &(lightingProgram_vs), NULL);
+	glCompileShader(lightingvs);
+	printShaderInfoLog(lightingvs);
 
-	GLuint texturefs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(texturefs, 1, (const GLchar **) &(texture_fs), NULL);
-	glCompileShader(texturefs);
-	printShaderInfoLog(texturefs);
+	GLuint lightingfs = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(lightingfs, 1, (const GLchar **) &(lightingProgram_fs), NULL);
+	glCompileShader(lightingfs);
+	printShaderInfoLog(lightingfs);
 
-	textureProgram = glCreateProgram();
-	glAttachShader(textureProgram, texturevs);
-	glAttachShader(textureProgram, texturefs);
-	glLinkProgram(textureProgram);
+	lightingProgram = glCreateProgram();
+	glAttachShader(lightingProgram, lightingvs);
+	glAttachShader(lightingProgram, lightingfs);
+	glLinkProgram(lightingProgram);
 
 	GLfloat amb[] = {0.2,0.2,0.2};
 	GLfloat diff[] = {1.0,1.0,1.0};
@@ -285,7 +334,10 @@ void init(void)
     //Terrain
 	for(int x = 0; x < 50; x++){
         for(int y = 0; y < 50; y++){
-            randomValue[x][y] = rand() % 50 * .01;
+            if((x > 20 && x < 26) && (y > 18 && y < 30))
+                randomValue[x][y] = 0.0f;
+            else
+                randomValue[x][y] = rand() % 50 * .01;
         }
 	}
 
@@ -483,6 +535,25 @@ void turnRight(){
     angularAccel += .003;
 }
 
+void drawTeapot(){
+    glBegin(GL_TRIANGLES);
+    for(int f = 0; f < NUM_FACES*3; f+=3)
+    {
+        glTexCoord2f(verts[faces[f]*3-3], verts[faces[f]*3-2]);
+        glNormal3f(norms[faces[f]*3-3], norms[faces[f]*3-2], norms[faces[f]*3-1]);
+        glVertex3f(verts[faces[f]*3-3], verts[faces[f]*3-2], verts[faces[f]*3-1]);
+
+        glTexCoord2f(verts[faces[f+1]*3-3], verts[faces[f+1]*3-2]);
+        glNormal3f(norms[faces[f+1]*3-3], norms[faces[f+1]*3-2], norms[faces[f+1]*3-1]);
+        glVertex3f(verts[faces[f+1]*3-3], verts[faces[f+1]*3-2], verts[faces[f+1]*3-1]);
+
+        glTexCoord2f(verts[faces[f+2]*3-3], verts[faces[f+2]*3-2]);
+        glNormal3f(norms[faces[f+2]*3-3], norms[faces[f+2]*3-2], norms[faces[f+2]*3-1]);
+        glVertex3f(verts[faces[f+2]*3-3], verts[faces[f+2]*3-2], verts[faces[f+2]*3-1]);
+    }
+    glEnd();
+}
+
 void display(void)
 {
     float accel = .006;
@@ -516,7 +587,7 @@ void display(void)
         position.z = 6;
     }
 
-	GLfloat tanamb[] =  {0.10, 0.50, 0.10, 1.0};
+	GLfloat tanamb[] =  {0.05, 0.25, 0.05, 1.0};
 	GLfloat tandiff[] = {0.03, 0.15, 0.03, 1.0};
 	GLfloat tanspec[] = {0.03, 0.05, 0.03, 1.0};	// grass
 
@@ -524,7 +595,7 @@ void display(void)
 	GLfloat teadiff[] = {0.5,0.5,0.5,1.0};
 	GLfloat teaspec[] = {0.3,0.3,0.3,1.0};	// Teapot
 
-	GLfloat lpos[] = {-10.0,10.0,10.0,0.0};	// sun, high noon
+	GLfloat lpos[] = {-3.0,3.0,3.0,0.0};	// sun, high noon
 
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -543,16 +614,67 @@ void display(void)
 	// send the light position down as if it was a vertex in world coordinates
 	glLightfv(GL_LIGHT0, GL_POSITION, lpos);
 
-    glPushMatrix();
-    glTranslatef(0.0f,0.0f,5.0f);
-    glRotatef(90.0,1.0,0.0,0.0);
-    glRotatef(90.0,0.0,1.0,0.0);
-
 	// load teapot material
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, teaamb);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, teadiff);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, teaspec);
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 50.0);
+
+    //Small teapots
+    glPushMatrix(); //Default opengl
+    glUseProgram(0);
+    glTranslatef(-1.0f,6.0f,5.2f);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glRotatef(90.0,0.0,1.0,0.0);
+    glScalef(.3,.3,.3);
+    drawTeapot();
+    glPopMatrix();
+
+    glPushMatrix(); //Texture
+    glUseProgram(0);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, _teapot);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTranslatef(-1.0f,4.0f,5.2f);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glRotatef(90.0,0.0,1.0,0.0);
+    glScalef(.3,.3,.3);
+    drawTeapot();
+    glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    glPushMatrix(); //Sphere Map
+    glUseProgram(0);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, _sphere);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+    glTranslatef(-1.0f,-4.0f,5.2f);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glRotatef(90.0,0.0,1.0,0.0);
+    glScalef(.3,.3,.3);
+    drawTeapot();
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glPopMatrix();
+
+    glPushMatrix(); //Blinn Lighting
+    glUseProgram(lightingProgram);
+    glTranslatef(-1.0f,-6.0f,5.2f);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glRotatef(90.0,0.0,1.0,0.0);
+    glScalef(.3,.3,.3);
+    drawTeapot();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.0f,0.0f,5.0f);
+    glRotatef(90.0,1.0,0.0,0.0);
+    glRotatef(90.0,0.0,1.0,0.0);
 
     //Give the teapot texture
    if(sphereMap==1){
@@ -571,27 +693,15 @@ void display(void)
         glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
         glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
    }
+   else if(sphereMap == 3){
+        glUseProgram(lightingProgram);
+   }
    else{
         glUseProgram(0);
    }
 
-    //Draw teapot
-    glBegin(GL_TRIANGLES);
-    for(int f = 0; f < NUM_FACES*3; f+=3)
-    {
-        glTexCoord2f(verts[faces[f]*3-3], verts[faces[f]*3-2]);
-        glNormal3f(norms[faces[f]*3-3], norms[faces[f]*3-2], norms[faces[f]*3-1]);
-        glVertex3f(verts[faces[f]*3-3], verts[faces[f]*3-2], verts[faces[f]*3-1]);
-
-        glTexCoord2f(verts[faces[f+1]*3-3], verts[faces[f+1]*3-2]);
-        glNormal3f(norms[faces[f+1]*3-3], norms[faces[f+1]*3-2], norms[faces[f+1]*3-1]);
-        glVertex3f(verts[faces[f+1]*3-3], verts[faces[f+1]*3-2], verts[faces[f+1]*3-1]);
-
-        glTexCoord2f(verts[faces[f+2]*3-3], verts[faces[f+2]*3-2]);
-        glNormal3f(norms[faces[f+2]*3-3], norms[faces[f+2]*3-2], norms[faces[f+2]*3-1]);
-        glVertex3f(verts[faces[f+2]*3-3], verts[faces[f+2]*3-2], verts[faces[f+2]*3-1]);
-    }
-    glEnd();
+    //Draw main teapot
+    drawTeapot();
 
     if(sphereMap == 1){
         glDisable(GL_TEXTURE_2D);
@@ -670,14 +780,8 @@ void cleanUp(){
 void keyboard(unsigned char key, int x, int y)
 {
    switch (key) {
-		case '-':
-			sealevel -= 0.01;
-			break;
-		case '+':
-		case '=':
-			sealevel += 0.01;
-			break;
-        case ' ' : sphereMap = (sphereMap+1)%3; break;
+
+        case ' ' : sphereMap = (sphereMap+1)%4; break;
 
 		case 'd' : keysDown[RIGHT] = true; break;
         case 'a' : keysDown[LEFT]  = true; break;
