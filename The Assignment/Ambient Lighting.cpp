@@ -48,22 +48,98 @@ GLuint _grass;
 GLuint _teapot;
 GLuint _sphere;
 
-bool sphereMap;
+int sphereMap;
 
 //Reads in file for shaders
 std::string filetext;
-std::string* loadFileToString(char const * const fname)
+std::string* loadFileToString(const char * fname)
 {
     std::ifstream ifile(fname);
+
+    if(ifile == NULL){
+        std::cout << "File " << fname << " not loaded." << std::endl;
+    }
 
     while( ifile.good() ) {
         std::string line;
         std::getline(ifile, line);
-        filetext.append(line + "\n");
+        filetext.append(line,0,line.size()-1);
+        filetext.push_back(' ');
     }
+
+    filetext.push_back('/n');
 
     return &filetext;
 }
+
+char* sky_vs = "\
+    varying vec2 texture_coordinate;\
+	void main(void){\
+		gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+		texture_coordinate = vec2(gl_MultiTexCoord0);\
+	}";
+char* sky_fs = "\
+    varying vec2 texture_coordinate; uniform sampler2D my_color_texture;\
+	void main(void) {\
+	    gl_FragColor = texture2D(my_color_texture, texture_coordinate);\
+	}";
+
+char* grass_vs = "\
+    varying vec4 position;\
+    varying vec3 normal;\
+    varying vec3 vertex_to_light_vector;\
+    void main()\
+    {\
+        position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+        gl_Position = position;\
+        normal = gl_NormalMatrix * gl_Normal;\
+        vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\
+        vertex_to_light_vector = vec3(gl_LightSource[0].position - vertex_in_modelview_space);\
+    }";
+
+char* grass_fs = "\
+    varying vec4 position;\
+    varying vec3 normal;\
+    varying vec3 vertex_to_light_vector;\
+    uniform sampler2D my_color_texture;\
+    void main()\
+    {\
+        const vec4 AmbientColor = vec4(0.0, 0.1, 0.0, 1.0);\
+        const vec4 DiffuseColor = vec4(0.0, 0.2, 0.0, 1.0);\
+        vec3 normalized_normal = normalize(normal);\
+        vec3 normalized_vertex_to_light_vector = normalize(vertex_to_light_vector);\
+        float DiffuseTerm = clamp(dot(normal, vertex_to_light_vector), 0.0, 1.0);\
+        gl_FragColor = AmbientColor + DiffuseColor * DiffuseTerm + texture2D(my_color_texture, vec2(position.x, position.y));\;\
+	}";
+
+char* teapot_vs = "\
+    varying vec3 position;\
+    varying vec3 normal;\
+    varying vec3 lightPos;\
+	void main(void){\
+		gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+		normal = gl_Normal;\
+	}";
+
+char* teapot_fs = "\
+    varying vec3 position;\
+    varying vec3 normal;\
+    varying vec3 lightPos;\
+    uniform sampler2D my_color_texture;\
+    void main(void) {\
+        const vec4 AmbientColor = vec4(0.1, 0.1, 0.1, 1.0);\
+        gl_FragColor = AmbientColor + texture2D(my_color_texture, vec2(normal.x,normal.y));\
+    }";
+
+char* texture_fs = "\
+    varying vec3 position;\
+    varying vec3 normal;\
+    varying vec3 lightPos;\
+    uniform sampler2D my_color_texture;\
+    void main(void) {\
+        const vec4 AmbientColor = vec4(0.1, 0.1, 0.1, 1.0);\
+        gl_FragColor = AmbientColor + texture2D(my_color_texture, vec2(normal.x,normal.y));\
+    }";
 
 /*
 Tastefully borrowed from
@@ -91,17 +167,21 @@ void printShaderInfoLog(GLuint obj)
 GLuint skyProgram;
 GLuint grassProgram;
 GLuint teapotProgram;
+GLuint textureProgram;
+
+//Terrain
+float randomValue[50][50];
 
 void init(void)
 {
     //Sky Shader and program
 	GLuint skyvs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(skyvs, 1, (const GLchar **) (loadFileToString("data/sky_vs")), NULL);
+	glShaderSource(skyvs, 1, (const GLchar **) &(sky_vs), NULL);
 	glCompileShader(skyvs);
 	printShaderInfoLog(skyvs);
 
 	GLuint skyfs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(skyfs, 1, (const GLchar **) (loadFileToString("data/sky_fs")), NULL);
+	glShaderSource(skyfs, 1, (const GLchar **) &(sky_fs), NULL);
 	glCompileShader(skyfs);
 	printShaderInfoLog(skyfs);
 
@@ -110,14 +190,16 @@ void init(void)
 	glAttachShader(skyProgram, skyfs);
 	glLinkProgram(skyProgram);
 
+    //std::cout << "GRASS" << std::endl << std::endl;
+
 	//Grass Shader and program
 	GLuint grassvs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(grassvs, 1, (const GLchar **) (loadFileToString("data/grass_vs")), NULL);
+	glShaderSource(grassvs, 1, (const GLchar **) &(grass_vs), NULL);
 	glCompileShader(grassvs);
 	printShaderInfoLog(grassvs);
 
 	GLuint grassfs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(grassfs, 1, (const GLchar **) (loadFileToString("data/grass_fs")), NULL);
+	glShaderSource(grassfs, 1, (const GLchar **) &(grass_fs), NULL);
 	glCompileShader(grassfs);
 	printShaderInfoLog(grassfs);
 
@@ -126,14 +208,16 @@ void init(void)
 	glAttachShader(grassProgram, grassfs);
 	glLinkProgram(grassProgram);
 
+    //std::cout << "TEAPOT" << std::endl << std::endl;
+
 	//Teapot Shader and program
 	GLuint teapotvs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(teapotvs, 1, (const GLchar **) (loadFileToString("data/grass_vs")), NULL);
+	glShaderSource(teapotvs, 1, (const GLchar **) &(teapot_vs), NULL);
 	glCompileShader(teapotvs);
 	printShaderInfoLog(teapotvs);
 
 	GLuint teapotfs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(teapotfs, 1, (const GLchar **) (loadFileToString("data/sky_fs")), NULL);
+	glShaderSource(teapotfs, 1, (const GLchar **) &(teapot_fs), NULL);
 	glCompileShader(teapotfs);
 	printShaderInfoLog(teapotfs);
 
@@ -141,6 +225,22 @@ void init(void)
 	glAttachShader(teapotProgram, teapotvs);
 	glAttachShader(teapotProgram, teapotfs);
 	glLinkProgram(teapotProgram);
+
+	//Texture Shader and program
+	GLuint texturevs = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(texturevs, 1, (const GLchar **) &(teapot_vs), NULL);
+	glCompileShader(texturevs);
+	printShaderInfoLog(texturevs);
+
+	GLuint texturefs = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(texturefs, 1, (const GLchar **) &(texture_fs), NULL);
+	glCompileShader(texturefs);
+	printShaderInfoLog(texturefs);
+
+	textureProgram = glCreateProgram();
+	glAttachShader(textureProgram, texturevs);
+	glAttachShader(textureProgram, texturefs);
+	glLinkProgram(textureProgram);
 
 	GLfloat amb[] = {0.2,0.2,0.2};
 	GLfloat diff[] = {1.0,1.0,1.0};
@@ -156,7 +256,7 @@ void init(void)
 	glClearColor (0.0, 0.75, 1.0, 0.0);	// sky
 	glEnable(GL_DEPTH_TEST);
 
-	sealevel = .25;
+	sealevel = 5.25;
 
     keysDown = new bool[numKeysDefined];
     for(int i = 0; i < numKeysDefined; i++){
@@ -165,7 +265,7 @@ void init(void)
 
     position.x = -5;
     position.y = 1;
-    position.z = 1;
+    position.z = 6;
 
     direction.x = 1;
     direction.y = 0;
@@ -181,6 +281,13 @@ void init(void)
 
     speed = glm::vec3(0.0f,0.0f,0.0f);
     angularAccel = 0.0f;
+
+    //Terrain
+	for(int x = 0; x < 50; x++){
+        for(int y = 0; y < 50; y++){
+            randomValue[x][y] = rand() % 50 * .01;
+        }
+	}
 
     //Create teapot
 	verts = (GLfloat*)malloc(NUM_VERTS*3*sizeof(GLfloat));
@@ -264,7 +371,7 @@ void init(void)
         std::cout << "failed to load teapot" << std::endl;
     }
 
-    sphereMap = false;
+    sphereMap = 0;
     //sphereMap texture
     _sphere = SOIL_load_OGL_texture(
                     "data/spheremap.png",
@@ -359,6 +466,10 @@ void drawSkybox(){
    glEnd();
 
    // Restore enable bits and matrix
+   glDisable(GL_TEXTURE_2D);
+   glEnable(GL_DEPTH_TEST);
+   glEnable(GL_LIGHTING);
+
    glPopAttrib();
    glPopMatrix();
 }
@@ -394,6 +505,17 @@ void display(void)
     direction = glm::normalize(direction * float(cos(angularAccel)) + rightWing * float(sin(angularAccel)));
     rightWing = glm::cross(direction, up);
 
+    //Calculate z position
+    if(position.x < 25 && position.x > -25 && position.y > -25 && position.y < 25){
+        position.z = 6 + (randomValue[(int)position.x+24][(int)position.y+24]
+                       +  randomValue[(int)position.x+25][(int)position.y+24]
+                       +  randomValue[(int)position.x+24][(int)position.y+25]
+                       +  randomValue[(int)position.x+25][(int)position.y+25])/4;
+    }
+    else{
+        position.z = 6;
+    }
+
 	GLfloat tanamb[] =  {0.10, 0.50, 0.10, 1.0};
 	GLfloat tandiff[] = {0.03, 0.15, 0.03, 1.0};
 	GLfloat tanspec[] = {0.03, 0.05, 0.03, 1.0};	// grass
@@ -402,16 +524,13 @@ void display(void)
 	GLfloat teadiff[] = {0.5,0.5,0.5,1.0};
 	GLfloat teaspec[] = {0.3,0.3,0.3,1.0};	// Teapot
 
-	GLfloat lpos[] = {3.0,1.0,1.0,0.0};	// sun, high noon
+	GLfloat lpos[] = {-10.0,10.0,10.0,0.0};	// sun, high noon
 
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(skyProgram);
     drawSkybox();
-
-
-    glUseProgram(teapotProgram);
 
 	glColor3f (1.0, 1.0, 1.0);
 	glLoadIdentity ();             /* clear the matrix */
@@ -424,9 +543,8 @@ void display(void)
 	// send the light position down as if it was a vertex in world coordinates
 	glLightfv(GL_LIGHT0, GL_POSITION, lpos);
 
-
-
     glPushMatrix();
+    glTranslatef(0.0f,0.0f,5.0f);
     glRotatef(90.0,1.0,0.0,0.0);
     glRotatef(90.0,0.0,1.0,0.0);
 
@@ -437,23 +555,27 @@ void display(void)
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 100.0);
 
     //Give the teapot texture
-   if(!sphereMap){
+   if(sphereMap==1){
+        glUseProgram(0);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, _teapot);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glEnable(GL_BLEND);
    }
-   else{
+   else if(sphereMap == 2){
+        glUseProgram(0);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, _sphere);
         glEnable(GL_TEXTURE_GEN_S);
         glEnable(GL_TEXTURE_GEN_T);
-        glTexGeni(GL_S,GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-        glTexGeni(GL_T,GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+        glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+        glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+   }
+   else{
+        glUseProgram(0);
    }
 
-    //Draw teapotGL_CLAMP_TO_EDGE
+    //Draw teapot
     glBegin(GL_TRIANGLES);
     for(int f = 0; f < NUM_FACES*3; f+=3)
     {
@@ -471,10 +593,10 @@ void display(void)
     }
     glEnd();
 
-    if(!sphereMap){
+    if(sphereMap == 1){
         glDisable(GL_TEXTURE_2D);
     }
-    else{
+    else if(sphereMap == 2){
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_TEXTURE_GEN_S);
         glDisable(GL_TEXTURE_GEN_T);
@@ -482,21 +604,43 @@ void display(void)
 
     glPopMatrix();
 
-    glUseProgram(grassProgram);
+    glUseProgram(0);
 	// Ground plane material
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, tanamb);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, tandiff);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, tanspec);
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 50.0);
 
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, _grass);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	// Ground is a single quad
-	glNormal3f(0.0,0.0,1.0);
 	glBegin(GL_QUADS);
-		glVertex3f(-50,-50,sealevel);
-		glVertex3f(50,-50,sealevel);
-		glVertex3f(50,50,sealevel);
-		glVertex3f(-50,50,sealevel);
+	for(int x = -25; x < 25; x++){
+        for(int y = -25; y < 25; y++){
+            glm::vec3 dx = glm::vec3(randomValue[x+25] - randomValue[x+24], 0, 1);
+            glm::vec3 dy = glm::vec3(0, randomValue[y+25] - randomValue[y+24], 1);
+            glm::vec3 cross = glm::cross(dx, dy);
+            glNormal3f(cross.x, cross.y , cross.z);
+
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(x,y,sealevel + randomValue[x+24][y+24]);
+
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(x+1,y,sealevel + randomValue[x+25][y+24]);
+
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(x+1,y+1,sealevel + randomValue[x+25][y+25]);
+
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(x,y+1,sealevel + randomValue[x+24][y+25]);
+        }
+	}
 	glEnd();
+
+	glDisable(GL_TEXTURE_2D);
 
     //Reset keys
     for(int i = 0; i < numKeysDefined; i++){
@@ -514,7 +658,7 @@ void reshape (int w, int h)
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(90.0,(float)w/h,0.01,10.0);
+	gluPerspective(90.0,(float)w/h,0.01,20.0);
 	glMatrixMode (GL_MODELVIEW);
 }
 
@@ -533,7 +677,7 @@ void keyboard(unsigned char key, int x, int y)
 		case '=':
 			sealevel += 0.01;
 			break;
-        case ' ' : sphereMap = !sphereMap; break;
+        case ' ' : sphereMap = (sphereMap+1)%3; break;
 
 		case 'd' : keysDown[RIGHT] = true; break;
         case 'a' : keysDown[LEFT]  = true; break;

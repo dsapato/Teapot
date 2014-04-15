@@ -92,25 +92,29 @@ void objParser::parse(GLfloat * verts, GLfloat * norms, GLuint * faces){
 }
 
 void objParser::calculateFaceNormals(GLfloat * verts, GLfloat * norms, GLuint * faces){
-    glm::vec3 * faceNormals = (glm::vec3*)malloc(NUM_VERTS*sizeof(glm::vec3));
+    glm::vec3 * faceNormals = (glm::vec3*)malloc(NUM_VERTS*3*sizeof(glm::vec3));
 
-    for(int i = 0; i < NUM_FACES; i+=3){
+    for(int i = 0; i < NUM_VERTS*3; i+=3){
+        faceNormals[i] = glm::vec3(0.0,0.0,0.0);
+    }
+
+    for(int i = 0; i < NUM_FACES*3; i+=3){
         glm::vec3 v1 = glm::vec3(verts[faces[i  ]*3-3],verts[faces[i  ]*3-2],verts[faces[i  ]*3-1]);
         glm::vec3 v2 = glm::vec3(verts[faces[i+1]*3-3],verts[faces[i+1]*3-2],verts[faces[i+1]*3-1]);
         glm::vec3 v3 = glm::vec3(verts[faces[i+2]*3-3],verts[faces[i+2]*3-2],verts[faces[i+2]*3-1]);
 
         glm::vec3 faceNorm = glm::normalize(glm::cross(v2-v1,v3-v1));
 
-        faceNormals[faces[i  ]-1] += faceNorm;
-        faceNormals[faces[i+1]-1] += faceNorm;
-        faceNormals[faces[i+2]-1] += faceNorm;
+        faceNormals[faces[i  ]*3-3] += faceNorm;
+        faceNormals[faces[i+1]*3-3] += faceNorm;
+        faceNormals[faces[i+2]*3-3] += faceNorm;
     }
 
-    for(int i = 0; i < NUM_VERTS; i++){
+    for(int i = 0; i < NUM_VERTS*3; i+=3){
         glm::vec3 normalized = glm::normalize(faceNormals[i]);
-        norms[(i*3) ] = normalized.x;
-        norms[(i*3)+1] = normalized.y;
-        norms[(i*3)+2] = normalized.z;
+        norms[i ] = normalized.x;
+        norms[i+1] = normalized.y;
+        norms[i+2] = normalized.z;
     }
 
     free(faceNormals);

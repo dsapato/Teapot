@@ -701,7 +701,7 @@
 	<X11/Xmd.h>
 	<GL/glew.h>
 
-1397524327 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\ambient lighting.cpp
+1397543471 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\ambient lighting.cpp
 	<stdlib.h>
 	<math.h>
 	<glew.h>
@@ -964,7 +964,7 @@
 	<vector>
 	<GL/glut.h>
 
-1397452227 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\objparser.cpp
+1397530445 source:c:\users\danny\programming\c++ and opengl\cs 418\mp3\the assignment\objparser.cpp
 	<iostream>
 	<fstream>
 	<string>
